@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"package": "com.starwindstudios.crowned.client.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+      "AvatarRendererMixin",
+      "AvatarRenderStateMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
