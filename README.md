@@ -1,9 +1,4 @@
 # Crowned
+Crowned adds one simple item: **The Crown**
 
-## Setup
-
-For setup instructions, please see the [Fabric Documentation page](https://docs.fabricmc.net/develop/getting-started/creating-a-project#setting-up) related to the IDE that you are using.
-
-## License
-
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+The crown has no special ability or specific purpose other than being displayed floating above the player's head and is intended to be used primarily in roleplay.
