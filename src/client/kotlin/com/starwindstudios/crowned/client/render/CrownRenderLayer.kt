@@ -1,6 +1,7 @@
 package com.starwindstudios.crowned.client.render
 
 import com.mojang.blaze3d.vertex.PoseStack
+import com.mojang.math.Axis
 import com.starwindstudios.crowned.Crowned
 import com.starwindstudios.crowned.client.access.RenderStateAccessor
 import net.minecraft.client.model.HumanoidModel
@@ -30,12 +31,16 @@ class CrownRenderLayer(
     ) {
         if(state !is RenderStateAccessor) return
         val player = state.player
+        if(player.isCrouching) return
 
         if(!player.inventory.contains { stack -> stack.item == Crowned.CROWN }) return
 
         poseStack.pushPose()
 
         val overlayCoords = LivingEntityRenderer.getOverlayCoords(state, 0.0f)
+
+        val rotation = (player.tickCount % 100f) / 100f * 360f
+        poseStack.mulPose(Axis.YP.rotationDegrees(rotation))
 
         submitNodeCollector.submitModel(
             this.model,
