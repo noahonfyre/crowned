@@ -17,9 +17,9 @@ class CrownModel(root: ModelPart) : PlayerModel(root, false) {
         fun createLayerDefinition(): LayerDefinition {
             val mesh = createMesh(CubeDeformation.NONE, false)
             val root = mesh.root.clearRecursively()
-            val head = root.getChild("head")
+            val body = root.getChild("body")
 
-            head.addOrReplaceChild("crown",
+            body.addOrReplaceChild("crown",
                 CubeListBuilder
                     .create()
                     .texOffs(0, 0)
