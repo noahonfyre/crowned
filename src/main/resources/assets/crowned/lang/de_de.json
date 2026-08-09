@@ -1,3 +1,9 @@
 {
-  "item.crowned.crown": "Krone"
+  "item.crowned.crown": "Krone",
+  "item.crowned.cherry_crown": "Cherry Krone",
+  "item.crowned.canyon_crown": "Canyon Krone",
+  "item.crowned.jungle_crown": "Jungle Krone",
+  "item.crowned.end_crown": "End Krone",
+  "item.crowned.eis_crown": "Eis Krone",
+  "item.crowned.pilz_crown": "Pilz Krone"
 }
