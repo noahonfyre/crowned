@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "crowned:cherry_crown",
+    "crowned:canyon_crown",
+    "crowned:jungle_crown",
+    "crowned:end_crown",
+    "crowned:eis_crown",
+    "crowned:pilz_crown"
+  ]
+}
