@@ -20,6 +20,15 @@ class CrownRenderLayer(
     ctx: EntityRendererProvider.Context
 ) : RenderLayer<AvatarRenderState, PlayerModel>(parent) {
     private var model: HumanoidModel<AvatarRenderState> = CrownModel(ctx.modelSet.bakeLayer(CrownModel.LAYER_LOCATION))
+    val textures = mapOf(
+        Crowned.CHERRY_CROWN to ResourceLocation.fromNamespaceAndPath(Crowned.ID, "textures/entity/crown/cherry.png"),
+        Crowned.CANYON_CROWN to ResourceLocation.fromNamespaceAndPath(Crowned.ID, "textures/entity/crown/canyon.png"),
+        Crowned.JUNGLE_CROWN to ResourceLocation.fromNamespaceAndPath(Crowned.ID, "textures/entity/crown/jungle.png"),
+        Crowned.END_CROWN to ResourceLocation.fromNamespaceAndPath(Crowned.ID, "textures/entity/crown/end.png"),
+        Crowned.EIS_CROWN to ResourceLocation.fromNamespaceAndPath(Crowned.ID, "textures/entity/crown/eis.png"),
+        Crowned.PILZ_CROWN to ResourceLocation.fromNamespaceAndPath(Crowned.ID, "textures/entity/crown/pilz.png")
+    )
+    val fallbackTexture = ResourceLocation.fromNamespaceAndPath(Crowned.ID, "textures/entity/crown.png")
 
     override fun submit(
         poseStack: PoseStack,
@@ -33,7 +42,18 @@ class CrownRenderLayer(
         val player = state.player
         if(player.isCrouching) return
 
-        if(!player.inventory.contains { stack -> stack.item == Crowned.CROWN }) return
+        var texture: ResourceLocation? = null
+
+        if(!player.inventory.contains {
+            stack ->
+                val isMatching = stack.`is`(Crowned.CROWNS)
+                texture = textures[stack.item]
+                return@contains isMatching
+        }) return
+
+        if(texture == null) {
+            texture = fallbackTexture
+        }
 
         poseStack.pushPose()
 
@@ -46,7 +66,7 @@ class CrownRenderLayer(
             this.model,
             state,
             poseStack,
-            RenderType.entityCutoutNoCull(ResourceLocation.fromNamespaceAndPath(Crowned.ID, "textures/entity/crown.png")),
+            RenderType.entityCutoutNoCull(texture),
             lightCoords,
             overlayCoords,
             state.outlineColor,
