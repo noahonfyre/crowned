@@ -24,8 +24,8 @@ class CrownModel(root: ModelPart) : PlayerModel(root, false) {
                     .create()
                     .texOffs(0, 0)
                     .addBox(
-                        -4.0f, -6.0f, -4.0f,
-                        8.0f, 6.0f, 8.0f,
+                        -4.0f, -7.0f, -4.0f,
+                        8.0f, 7.0f, 8.0f,
                         CubeDeformation(0.0f)
                     ),
                 PartPose.offset(0.0f, -9.5f, 0.0f)
