@@ -4,11 +4,13 @@ import jdk.javadoc.internal.doclets.formats.html.Signatures
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.minecraft.core.Registry
+import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
+import net.minecraft.util.Unit
 import net.minecraft.world.item.CreativeModeTabs
 import net.minecraft.world.item.Item
 import org.slf4j.Logger
@@ -19,14 +21,14 @@ object Crowned : ModInitializer {
 
 	val LOGGER: Logger = LoggerFactory.getLogger(ID)
 
-    val CROWN = register("crown") { props -> Item(props) }
+    val CROWN = register("crown") { props -> Item(props.stacksTo(1).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)) }
 
-    val CHERRY_CROWN = register("cherry_crown") { props -> Item(props) }
-    val CANYON_CROWN = register("canyon_crown") { props -> Item(props) }
-    val JUNGLE_CROWN = register("jungle_crown") { props -> Item(props) }
-    val END_CROWN = register("end_crown") { props -> Item(props) }
-    val EIS_CROWN = register("eis_crown") { props -> Item(props) }
-    val PILZ_CROWN = register("pilz_crown") { props -> Item(props) }
+    val CHERRY_CROWN = register("cherry_crown") { props -> Item(props.stacksTo(1).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)) }
+    val CANYON_CROWN = register("canyon_crown") { props -> Item(props.stacksTo(1).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)) }
+    val JUNGLE_CROWN = register("jungle_crown") { props -> Item(props.stacksTo(1).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)) }
+    val END_CROWN = register("end_crown") { props -> Item(props.stacksTo(1).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)) }
+    val EIS_CROWN = register("eis_crown") { props -> Item(props.stacksTo(1).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)) }
+    val PILZ_CROWN = register("pilz_crown") { props -> Item(props.stacksTo(1).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)) }
 
     val CROWNS: TagKey<Item> = createKey(Registries.ITEM, "crowns")
 
@@ -34,7 +36,15 @@ object Crowned : ModInitializer {
 		LOGGER.info("")
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES)
-            .register { creativeTab -> creativeTab.accept(CROWN) }
+            .register { creativeTab ->
+                creativeTab.accept(CROWN)
+                creativeTab.accept(CHERRY_CROWN)
+                creativeTab.accept(CANYON_CROWN)
+                creativeTab.accept(JUNGLE_CROWN)
+                creativeTab.accept(END_CROWN)
+                creativeTab.accept(EIS_CROWN)
+                creativeTab.accept(PILZ_CROWN)
+            }
     }
 
     fun <T : Any> createKey(registry: ResourceKey<Registry<T>>, path: String): TagKey<T> {
