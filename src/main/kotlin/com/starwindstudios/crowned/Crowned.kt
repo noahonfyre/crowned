@@ -21,14 +21,14 @@ object Crowned : ModInitializer {
 
 	val LOGGER: Logger = LoggerFactory.getLogger(ID)
 
-    val CROWN = register("crown") { props -> Item(props.stacksTo(1).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)) }
+    val CROWN = register("crown") { props -> Item(props.stacksTo(1)) }
 
-    val CHERRY_CROWN = register("cherry_crown") { props -> Item(props.stacksTo(1).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)) }
-    val CANYON_CROWN = register("canyon_crown") { props -> Item(props.stacksTo(1).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)) }
-    val JUNGLE_CROWN = register("jungle_crown") { props -> Item(props.stacksTo(1).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)) }
-    val END_CROWN = register("end_crown") { props -> Item(props.stacksTo(1).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)) }
-    val EIS_CROWN = register("eis_crown") { props -> Item(props.stacksTo(1).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)) }
-    val PILZ_CROWN = register("pilz_crown") { props -> Item(props.stacksTo(1).component(DataComponents.UNBREAKABLE, Unit.INSTANCE)) }
+    val CHERRY_CROWN = register("cherry_crown") { props -> Item(props.stacksTo(1)) }
+    val CANYON_CROWN = register("canyon_crown") { props -> Item(props.stacksTo(1)) }
+    val JUNGLE_CROWN = register("jungle_crown") { props -> Item(props.stacksTo(1)) }
+    val END_CROWN = register("end_crown") { props -> Item(props.stacksTo(1)) }
+    val EIS_CROWN = register("eis_crown") { props -> Item(props.stacksTo(1)) }
+    val PILZ_CROWN = register("pilz_crown") { props -> Item(props.stacksTo(1)) }
 
     val CROWNS: TagKey<Item> = createKey(Registries.ITEM, "crowns")
 
