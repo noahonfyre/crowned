@@ -14,10 +14,12 @@ import net.minecraft.client.renderer.entity.RenderLayerParent
 import net.minecraft.client.renderer.entity.layers.RenderLayer
 import net.minecraft.client.renderer.entity.state.AvatarRenderState
 import net.minecraft.resources.ResourceLocation
+import kotlin.math.tanh
+
 
 class CrownRenderLayer(
     parent: RenderLayerParent<AvatarRenderState, PlayerModel>,
-    ctx: EntityRendererProvider.Context
+    val ctx: EntityRendererProvider.Context
 ) : RenderLayer<AvatarRenderState, PlayerModel>(parent) {
     private var model: HumanoidModel<AvatarRenderState> = CrownModel(ctx.modelSet.bakeLayer(CrownModel.LAYER_LOCATION))
     val textures = mapOf(
@@ -59,7 +61,9 @@ class CrownRenderLayer(
 
         val overlayCoords = LivingEntityRenderer.getOverlayCoords(state, 0.0f)
 
-        val rotation = (player.tickCount % 100f) / 100f * 360f
+        val progress = ((player.tickCount + state.ageInTicks) / 2f % 100f) / 100f * 360f
+        val rotation = (tanh((progress/50f)-3.6f)+1f)*180f
+
         poseStack.mulPose(Axis.YP.rotationDegrees(rotation))
 
         submitNodeCollector.submitModel(
