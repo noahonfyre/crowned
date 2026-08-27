@@ -19,7 +19,7 @@ import kotlin.math.tanh
 
 class CrownRenderLayer(
     parent: RenderLayerParent<AvatarRenderState, PlayerModel>,
-    val ctx: EntityRendererProvider.Context
+    ctx: EntityRendererProvider.Context
 ) : RenderLayer<AvatarRenderState, PlayerModel>(parent) {
     private var model: HumanoidModel<AvatarRenderState> = CrownModel(ctx.modelSet.bakeLayer(CrownModel.LAYER_LOCATION))
     val textures = mapOf(
@@ -30,7 +30,7 @@ class CrownRenderLayer(
         Crowned.EIS_CROWN to ResourceLocation.fromNamespaceAndPath(Crowned.ID, "textures/entity/crown/eis.png"),
         Crowned.PILZ_CROWN to ResourceLocation.fromNamespaceAndPath(Crowned.ID, "textures/entity/crown/pilz.png")
     )
-    val fallbackTexture = ResourceLocation.fromNamespaceAndPath(Crowned.ID, "textures/entity/crown.png")
+    val fallbackTexture: ResourceLocation = ResourceLocation.fromNamespaceAndPath(Crowned.ID, "textures/entity/crown.png")
 
     override fun submit(
         poseStack: PoseStack,
@@ -44,18 +44,13 @@ class CrownRenderLayer(
         val player = state.player
         if(player.isCrouching) return
 
-        var texture: ResourceLocation? = null
+        var texture: ResourceLocation = fallbackTexture
 
-        if(!player.inventory.contains {
-            stack ->
-                val isMatching = stack.`is`(Crowned.CROWNS)
-                texture = textures[stack.item]
-                return@contains isMatching
+        if(!player.inventory.contains { stack ->
+            val isMatching = stack.`is`(Crowned.CROWNS)
+            texture = textures[stack.item] ?: return@contains false
+            return@contains isMatching
         }) return
-
-        if(texture == null) {
-            texture = fallbackTexture
-        }
 
         poseStack.pushPose()
 
